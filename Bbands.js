@@ -100,7 +100,7 @@ var method = {
           return Zone.in_bottom;
       } else if ((middle < this.price) && (this.prive <= upper)) {
           return Zone.in_above;
-      } else { 
+      } else {
           return Zone.above;
       }
   },
@@ -136,10 +136,16 @@ var method = {
 };
 
 method.init = function() {
+    default_settings = {
+        time_window: 20,
+        dev_up: 2,
+        dev_dn: 2
+    }
+    this.settings = Object.assign({}, default_settings, this.settings);
     var customBBandsSettings = {
-        optInTimePeriod: 20,
-        optInNbDevUp: 2,
-        optInNbDevDn: 2,
+        optInTimePeriod: this.settings.time_window,
+        optInNbDevUp: this.settings.dev_up,
+        optInNbDevDn: this.settings.dev_dn,
         optInMAType: 0
     }
     this.addTalibIndicator('bbs', 'bbands', customBBandsSettings);
